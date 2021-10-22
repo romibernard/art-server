@@ -4,6 +4,7 @@ const ObrasSchema = mongoose.Schema({
     name: {
         type: String,
         unique: true,
+        uppercase: true
         //required: true
     },
     sizeH: {
@@ -32,6 +33,15 @@ const ObrasSchema = mongoose.Schema({
     },
     price: {
         type: Number,
+        //required: true
+    },
+    autor: {
+        type: String
+        //required: true
+    },
+    contact: {
+        type: String,
+        trim: true
         //required: true
     }
 })

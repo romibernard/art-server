@@ -50,7 +50,9 @@ exports.createObra = async (req, res) => {
         sizeP,
         materials,
         availableForSale,
-        price
+        price,
+        autor,
+        contact
     } = req.body
 
     try {
@@ -62,7 +64,9 @@ exports.createObra = async (req, res) => {
             sizeP,
             materials,
             availableForSale,
-            price
+            price,
+            autor,
+            contact
         })
         res.json({
             data: newObra,
@@ -87,7 +91,9 @@ exports.updateObra = async (req, res) => {
         sizeP,
         materials,
         availableForSale,
-        price
+        price,
+        autor,
+        contact
     } = req.body
 
     try {
@@ -100,7 +106,9 @@ exports.updateObra = async (req, res) => {
             sizeP,
             materials,
             availableForSale,
-            price
+            price,
+            autor,
+            contact
         }, { new: true }) //regresa formulario actualizado
         return res.json({
             data: updatedObra
