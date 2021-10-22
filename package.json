@@ -1,9 +1,10 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,6 +17,17 @@
     "express": "^4.17.1",
     "express-validator": "^6.13.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.12"
-  }
+    "mongoose": "^6.0.12",
+    "nodemon": "^2.0.14"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romibernard/art-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/romibernard/art-server/issues"
+  },
+  "homepage": "https://github.com/romibernard/art-server#readme",
+  "description": ""
 }
