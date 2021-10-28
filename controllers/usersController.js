@@ -1,12 +1,10 @@
 const bcryptjs = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-//conjunto de errores/check de la ruta:
 const { validationResult } = require("express-validator")
 const User = require("./../models/User")
 
 exports.createUser = async (req, res) => {
-    // REVISIÓN DE VALIDACIONES
-    const errors = validationResult(req) //al momento de hacer mis checks, busca la propiedad de los errores.
+    const errors = validationResult(req)
     console.log(errors)
     if (!errors.isEmpty) {
         return res.status(400).json({
@@ -14,10 +12,9 @@ exports.createUser = async (req, res) => {
         })
     }
 
-    // Datos del formulario p/usuario
+    //form
     const { username, email, password } = req.body
 
-    // Encriptando contraseña
     try {
         const salt = await bcryptjs.genSalt(10)
         const hashedPassword = await bcryptjs.hash(password, salt)
@@ -28,21 +25,20 @@ exports.createUser = async (req, res) => {
         })
         console.log(newUser)
         //Registro ok-> no tengo que hacer login
-        //Autenticación - datos de la credencial:
         const payload = {
             user: {
                 id: newUser._id
             }
         }
-        // "firma" del servidor
+
         jwt.sign(
-            payload, //datos de la credencial
-            process.env.SECRET, //firma de mi env
+            payload,
+            process.env.SECRET,
             {
-                expiresIn: 360000 //"cookie"
+                expiresIn: 360000
             },
 
-            //Si falla el ingreso...
+
             (error, token) => {
                 console.log(error)
                 if (error) {

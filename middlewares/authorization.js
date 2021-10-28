@@ -1,8 +1,5 @@
-// descencriptando token y coincidencia con palabara secreta
-// importaciones
 const jwt = require("jsonwebtoken")
 
-// función descencriptación
 const unlockingToken = (req, res, next) => {
     const token = req.header("x-auth-token")
     if (!token) {
@@ -23,5 +20,4 @@ const unlockingToken = (req, res, next) => {
     }
 }
 
-// exportación
 module.exports = unlockingToken

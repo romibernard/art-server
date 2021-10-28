@@ -1,5 +1,4 @@
 //CRUD de Obras
-//importación del modelo
 const Obra = require('./../models/Obras')
 
 exports.getObraById = async (req, res) => {
@@ -19,7 +18,7 @@ exports.getObraById = async (req, res) => {
     }
 }
 
-//obtener obras
+
 exports.getAllObras = async (req, res) => {
     try {
         const obra = await Obra.find({})
@@ -39,7 +38,7 @@ exports.getAllObras = async (req, res) => {
     })
 }
 
-//crear obra
+
 exports.createObra = async (req, res) => {
     //Recabar datos formulario
     const {
@@ -80,7 +79,7 @@ exports.createObra = async (req, res) => {
     }
 }
 
-//actualizar obra
+
 exports.updateObra = async (req, res) => {
     const {
         id,
@@ -109,7 +108,7 @@ exports.updateObra = async (req, res) => {
             price,
             autor,
             contact
-        }, { new: true }) //regresa formulario actualizado
+        }, { new: true })
         return res.json({
             data: updatedObra
         })
@@ -121,7 +120,7 @@ exports.updateObra = async (req, res) => {
     }
 }
 
-//eliminación de obra
+
 exports.deleteObra = async (req, res) => {
     const { id } = req.body
     try {

@@ -1,12 +1,9 @@
-//* Importaciones
 const bcryptjs = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const User = require("./../models/User")
 const { validationResult } = require("express-validator")
 
-// *Controllers
 exports.loginUser = async (req, res) => {
-    //validando el formulario:
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         return res.status(400).json({
@@ -17,9 +14,9 @@ exports.loginUser = async (req, res) => {
     //recabando datos del formulario
     const { email, password } = req.body
     try {
-        //corroba que se tenga al usuario en la base de datos
+
         let foundUser = await User.findOne({ email })
-        //validando al usuario:
+
         if (!foundUser) {
             return res.status(400).json({
                 msgError: "El usuario o la contraseña son incorrectas."
@@ -27,16 +24,16 @@ exports.loginUser = async (req, res) => {
         }
 
         console.log("Usuario encontrado:", foundUser)
-        //verificando contraseña:
+
         const verifiedPassword = await bcryptjs.compare(password, foundUser.hashedPassword)
-        //si no coincide la contraseña...
+
         if (!verifiedPassword) {
             return res.status(400).json({
                 msgError: "El usuario o el password son incorrectos"
             })
         }
 
-        // entrega de credencial al token (si coincide)
+        
         const payload = {
             user: {
                 id: foundUser._id
@@ -45,7 +42,7 @@ exports.loginUser = async (req, res) => {
         // "firma"
         jwt.sign(
             payload,
-            process.env.SECRET, //de mi .env
+            process.env.SECRET,
             {
                 expiresIn: 360000
             },
@@ -56,7 +53,7 @@ exports.loginUser = async (req, res) => {
                         msgError: "Hubo un problema en la creación del token."
                     })
                 }
-                // Respuesta/entregando token
+
                 return res.json({
                     data: {
                         token
@@ -72,7 +69,7 @@ exports.loginUser = async (req, res) => {
     }
 }
 
-//* Comprobando token
+
 exports.verifyingToken = async (req, res) => {
     try {
         const userData = await User.findById(req.user.id).select("-hashedPassword")

@@ -1,4 +1,3 @@
-// ./config/db.js
 const mongoose = require("mongoose")
 
 const connectDB = async () => {
@@ -7,7 +6,6 @@ const connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
-
         console.log("Base de datos conectada")
 
     } catch (error) {
